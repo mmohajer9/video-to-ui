@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="assets/demo-hero.gif" alt="video-to-ui demo: a Stripe homepage screen recording analyzed and scaffolded into a runnable React app" width="900" />
+<video src="https://github.com/user-attachments/assets/f273e2fa-9fe6-4866-97bd-bfaa488e11e4" autoplay loop muted playsinline width="900"></video>
 
-<sub><a href="assets/demo-short.mp4">Same clip with player controls (MP4, 48s) →</a> &nbsp;·&nbsp; <a href="assets/demo-full-4x.mp4">Full 5-min walkthrough →</a></sub>
+<sub><a href="#demos">See three before/after demos →</a> &nbsp;·&nbsp; <a href="#full-walkthrough">Watch the full 5-min walkthrough →</a></sub>
 
 <h1>video-to-ui</h1>
 
@@ -21,6 +21,10 @@
   <a href="#what-you-get">What you get</a>
   &nbsp;·&nbsp;
   <a href="#demos">Demos</a>
+  &nbsp;·&nbsp;
+  <a href="#demos-mp4">MP4 demos</a>
+  &nbsp;·&nbsp;
+  <a href="#full-walkthrough">Full walkthrough</a>
   &nbsp;·&nbsp;
   <a href="#how-it-works">How it works</a>
   &nbsp;·&nbsp;
@@ -72,7 +76,7 @@ Modes 3 and 4 build on mode 2 — both run the same analysis under the hood, the
 
 ## 🎥 Demos
 
-Three before/after pairs. The recording on the left is the input; the artifact on the right is what mode 4 produced.
+Three before/after pairs. The recording on the left is the input; the artifact on the right is what mode 4 produced. Quick-loading GIF previews below — full-quality MP4 versions follow in the [next section](#demos-mp4).
 
 ### Stripe — Financial infrastructure landing
 
@@ -83,10 +87,10 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 <tr>
 <td>
-  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/stripe/input.mp4" autoplay loop muted playsinline controls width="100%"></video>
+  <img src="assets/demos/stripe/input.gif" width="100%" alt="Stripe homepage screen recording" />
 </td>
 <td>
-  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/stripe/output.mp4" autoplay loop muted playsinline controls width="100%"></video>
+  <img src="assets/demos/stripe/output.gif" width="100%" alt="Running React scaffold of the Stripe landing page" />
 </td>
 </tr>
 </table>
@@ -100,10 +104,10 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 <tr>
 <td>
-  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/linear-dashboard/input.mp4" autoplay loop muted playsinline controls width="100%"></video>
+  <img src="assets/demos/linear-dashboard/input.gif" width="100%" alt="Linear dashboard screen recording" />
 </td>
 <td>
-  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/linear-dashboard/output.mp4" autoplay loop muted playsinline controls width="100%"></video>
+  <img src="assets/demos/linear-dashboard/output.gif" width="100%" alt="Running React scaffold of the Linear dashboard" />
 </td>
 </tr>
 </table>
@@ -117,13 +121,82 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 <tr>
 <td align="center">
-  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/linear-mobile/input.mp4" autoplay loop muted playsinline controls width="55%"></video>
+  <img src="assets/demos/linear-mobile/input.gif" width="55%" alt="Linear mobile landing screen recording" />
 </td>
 <td align="center">
-  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/linear-mobile/output.mp4" autoplay loop muted playsinline controls width="55%"></video>
+  <img src="assets/demos/linear-mobile/output.gif" width="55%" alt="Running React scaffold of the Linear mobile landing" />
 </td>
 </tr>
 </table>
+
+---
+
+<a id="demos-mp4"></a>
+
+## 🎞️ Same demos in MP4
+
+The same three before/after pairs above, served as native MP4 — sharper, with hover-controls. Click anywhere on a clip to play.
+
+### Stripe (MP4)
+
+<table>
+<tr>
+<th width="50%">Input recording</th>
+<th width="50%">Output — runnable React scaffold</th>
+</tr>
+<tr>
+<td>
+  <video src="https://github.com/user-attachments/assets/7068802d-bfff-4ff4-ac74-8224d62a754c" autoplay loop muted playsinline width="100%"></video>
+</td>
+<td>
+  <video src="https://github.com/user-attachments/assets/dc917af4-9790-4a0d-a735-25f6307db4a7" autoplay loop muted playsinline width="100%"></video>
+</td>
+</tr>
+</table>
+
+### Linear Dashboard (MP4)
+
+<table>
+<tr>
+<th width="50%">Input recording</th>
+<th width="50%">Output — runnable React scaffold</th>
+</tr>
+<tr>
+<td>
+  <video src="https://github.com/user-attachments/assets/fd918cc3-6bf7-4b57-a2a4-5e1ff7922cab" autoplay loop muted playsinline width="100%"></video>
+</td>
+<td>
+  <video src="https://github.com/user-attachments/assets/aa7d0cff-c4db-4175-b50d-5927118764ce" autoplay loop muted playsinline width="100%"></video>
+</td>
+</tr>
+</table>
+
+### Linear Mobile (MP4)
+
+<table>
+<tr>
+<th width="50%">Input recording</th>
+<th width="50%">Output — runnable React scaffold</th>
+</tr>
+<tr>
+<td align="center">
+  <video src="https://github.com/user-attachments/assets/c936e1f2-e460-4a91-a948-d0897f324f46" autoplay loop muted playsinline width="55%"></video>
+</td>
+<td align="center">
+  <video src="https://github.com/user-attachments/assets/47365334-867b-45d7-acbc-c9ee4ee3939f" autoplay loop muted playsinline width="55%"></video>
+</td>
+</tr>
+</table>
+
+---
+
+<a id="full-walkthrough"></a>
+
+## ▶️ Full walkthrough
+
+A soup-to-nuts run on the Stripe recording — drop in the video, pick mode 4, end up with a runnable React app. ~22 minutes of real work, compressed 4× to roughly 5 minutes. No audio.
+
+<video src="https://github.com/user-attachments/assets/51eadd64-0364-4804-b443-c68bafbed631" controls width="100%"></video>
 
 ---
 
