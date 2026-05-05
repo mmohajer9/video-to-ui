@@ -43,6 +43,19 @@
 
 Claude doesn't accept video as input yet (true at the time of publishing this skill, they might add it later). I kept trying to recreate frontends from screen recordings by pasting in screenshots one at a time. I'd lose context between frames, the result was always off, and I'd give up halfway. Screenshots also miss the dynamic stuff: transitions, micro-animations, scroll-triggered reveals, hover states. None of that survives a still frame. So I built this. Every frame gets extracted, read in parallel by disposable subagents, and synthesized into a single design report or a full scaffold, depending on the mode. Motion and timing land in the report too, not just the static layout.
 
+<div align="center">
+
+| What ends up in the analysis | Screenshots only | Screen recording |
+| ---------------------------- | :--------------: | :--------------: |
+| Layout, palette, typography  |        ✅         |        ✅         |
+| Transitions between screens  |        ❌         |        ✅         |
+| Micro-animations             |        ❌         |        ✅         |
+| Scroll-triggered reveals     |        ❌         |        ✅         |
+| Hover and active states      |        ❌         |        ✅         |
+| Timing and pacing            |        ❌         |        ✅         |
+
+</div>
+
 ---
 
 <a id="quick-start"></a>
@@ -406,13 +419,13 @@ This skill is **built and tested for Claude Code**. The pieces are split between
 - **Mode 1 (frame extraction)** runs entirely through [`scripts/extract-frames.sh`](skills/video-to-ui/scripts/extract-frames.sh) — any agent that can execute bash will work.
 - **Modes 2–4** depend on Claude Code's `Task` tool to dispatch *disposable* subagents that read frame batches in parallel and write compact reports back. That 2-tier walk is what keeps the main context tiny on long recordings. Agents with an equivalent subagent primitive are good fits; agents without one still produce the right output but burn the main context faster, which can hit limits on long videos.
 
-| Agent                              | Compatibility                                   |
-| ---------------------------------- | ----------------------------------------------- |
-| Claude Code                        | ✅ Tested · primary target                      |
-| Claude Agent SDK                   | ✅ Same skill format and subagent primitive     |
-| Copilot CLI                        | ⚠️ Loads via the `skill` tool; subagent semantics differ |
-| Cursor · Continue · Aider          | ⚠️ Use [`SKILL.md`](skills/video-to-ui/SKILL.md) as a long prompt; no batched parallelism |
-| Generic LLM with file + bash       | ⚠️ Workable with manual orchestration            |
+| Agent                        | Compatibility                                                                            |
+| ---------------------------- | ---------------------------------------------------------------------------------------- |
+| Claude Code                  | ✅ Tested · primary target                                                                |
+| Claude Agent SDK             | ✅ Same skill format and subagent primitive                                               |
+| Copilot CLI                  | ⚠️ Loads via the `skill` tool; subagent semantics differ                                  |
+| Cursor · Continue · Aider    | ⚠️ Use [`SKILL.md`](skills/video-to-ui/SKILL.md) as a long prompt; no batched parallelism |
+| Generic LLM with file + bash | ⚠️ Workable with manual orchestration                                                     |
 
 If you adapt this for another agent, please open a PR or post in [Discussions](https://github.com/mmohajer9/video-to-ui/discussions) — happy to ship vetted variants under an `agents/` folder.
 
