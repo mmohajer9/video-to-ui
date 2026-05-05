@@ -1,9 +1,5 @@
 <div align="center">
 
-<video src="https://github.com/user-attachments/assets/f273e2fa-9fe6-4866-97bd-bfaa488e11e4" autoplay loop muted playsinline width="900"></video>
-
-<sub><a href="#demos">See three before/after demos →</a> &nbsp;·&nbsp; <a href="#full-walkthrough">Watch the full 5-min walkthrough →</a></sub>
-
 <h1>video-to-ui</h1>
 
 <p><b>🎬 Turn a UI screen recording into design data, code edits, or a runnable React scaffold.</b></p>
@@ -14,6 +10,10 @@
   <a href="https://ffmpeg.org/"><img src="https://img.shields.io/badge/requires-ffmpeg-007808" alt="Requires ffmpeg" /></a>
   <a href="https://github.com/mmohajer9/video-to-ui/stargazers"><img src="https://img.shields.io/github/stars/mmohajer9/video-to-ui?style=social" alt="GitHub stars" /></a>
 </p>
+
+<video src="https://github.com/user-attachments/assets/f273e2fa-9fe6-4866-97bd-bfaa488e11e4" autoplay loop muted playsinline width="900"></video>
+
+<sub><a href="#demos">See three before/after demos →</a> &nbsp;·&nbsp; <a href="#full-walkthrough">Watch the full 5-min walkthrough →</a></sub>
 
 <p>
   <a href="#quick-start">Quick start</a>
