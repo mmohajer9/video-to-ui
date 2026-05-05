@@ -11,7 +11,7 @@
   <a href="https://github.com/mmohajer9/video-to-ui/stargazers"><img src="https://img.shields.io/github/stars/mmohajer9/video-to-ui?style=social" alt="GitHub stars" /></a>
 </p>
 
-<video src="https://github.com/user-attachments/assets/f273e2fa-9fe6-4866-97bd-bfaa488e11e4" autoplay loop muted playsinline width="900"></video>
+<video src="https://github.com/user-attachments/assets/27338054-c311-4552-b2cf-57ae97c17081" autoplay loop muted playsinline width="900"></video>
 
 <sub><a href="#demos">See three before/after demos →</a> &nbsp;·&nbsp; <a href="#full-walkthrough">Watch the full 5-min walkthrough →</a></sub>
 
