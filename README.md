@@ -83,12 +83,10 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 <tr>
 <td>
-  <img src="assets/demos/stripe/input.gif" width="100%" alt="Stripe homepage screen recording" />
-  <br /><sub><a href="assets/demos/stripe/input.mp4">MP4 (sharper) ↓</a></sub>
+  <video src="assets/demos/stripe/input.mp4" autoplay loop muted playsinline controls width="100%"></video>
 </td>
 <td>
-  <img src="assets/demos/stripe/output.gif" width="100%" alt="Running React scaffold of the Stripe landing page at localhost" />
-  <br /><sub><a href="assets/demos/stripe/output.mp4">MP4 (sharper) ↓</a></sub>
+  <video src="assets/demos/stripe/output.mp4" autoplay loop muted playsinline controls width="100%"></video>
 </td>
 </tr>
 </table>
@@ -102,12 +100,10 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 <tr>
 <td>
-  <img src="assets/demos/linear-dashboard/input.gif" width="100%" alt="Linear dashboard screen recording" />
-  <br /><sub><a href="assets/demos/linear-dashboard/input.mp4">MP4 (sharper) ↓</a></sub>
+  <video src="assets/demos/linear-dashboard/input.mp4" autoplay loop muted playsinline controls width="100%"></video>
 </td>
 <td>
-  <img src="assets/demos/linear-dashboard/output.gif" width="100%" alt="Running React scaffold of the Linear dashboard at localhost" />
-  <br /><sub><a href="assets/demos/linear-dashboard/output.mp4">MP4 (sharper) ↓</a></sub>
+  <video src="assets/demos/linear-dashboard/output.mp4" autoplay loop muted playsinline controls width="100%"></video>
 </td>
 </tr>
 </table>
@@ -121,12 +117,10 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 <tr>
 <td align="center">
-  <img src="assets/demos/linear-mobile/input.gif" width="55%" alt="Linear mobile landing screen recording" />
-  <br /><sub><a href="assets/demos/linear-mobile/input.mp4">MP4 (sharper) ↓</a></sub>
+  <video src="assets/demos/linear-mobile/input.mp4" autoplay loop muted playsinline controls width="55%"></video>
 </td>
 <td align="center">
-  <img src="assets/demos/linear-mobile/output.gif" width="55%" alt="Running React scaffold of the Linear mobile landing at localhost" />
-  <br /><sub><a href="assets/demos/linear-mobile/output.mp4">MP4 (sharper) ↓</a></sub>
+  <video src="assets/demos/linear-mobile/output.mp4" autoplay loop muted playsinline controls width="55%"></video>
 </td>
 </tr>
 </table>
