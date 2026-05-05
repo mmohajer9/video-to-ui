@@ -80,6 +80,8 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 
 ### Stripe — Financial infrastructure landing
 
+<div align="center">
+
 <table>
 <tr>
 <th width="50%">Input recording</th>
@@ -95,7 +97,11 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 </table>
 
+</div>
+
 ### Linear — Dashboard
+
+<div align="center">
 
 <table>
 <tr>
@@ -112,7 +118,11 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 </table>
 
+</div>
+
 ### Linear — Mobile landing
+
+<div align="center">
 
 <table>
 <tr>
@@ -129,6 +139,8 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 </table>
 
+</div>
+
 ---
 
 <a id="demos-mp4"></a>
@@ -138,6 +150,8 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 The same three before/after pairs above, served as native MP4 — sharper, with hover-controls. Click anywhere on a clip to play.
 
 ### Stripe (MP4)
+
+<div align="center">
 
 <table>
 <tr>
@@ -154,7 +168,11 @@ The same three before/after pairs above, served as native MP4 — sharper, with 
 </tr>
 </table>
 
+</div>
+
 ### Linear Dashboard (MP4)
+
+<div align="center">
 
 <table>
 <tr>
@@ -171,7 +189,11 @@ The same three before/after pairs above, served as native MP4 — sharper, with 
 </tr>
 </table>
 
+</div>
+
 ### Linear Mobile (MP4)
+
+<div align="center">
 
 <table>
 <tr>
@@ -188,6 +210,8 @@ The same three before/after pairs above, served as native MP4 — sharper, with 
 </tr>
 </table>
 
+</div>
+
 ---
 
 <a id="full-walkthrough"></a>
@@ -196,7 +220,11 @@ The same three before/after pairs above, served as native MP4 — sharper, with 
 
 A soup-to-nuts run on the Stripe recording — drop in the video, pick mode 4, end up with a runnable React app. ~22 minutes of real work, compressed 4× to roughly 5 minutes. No audio.
 
+<div align="center">
+
 <video src="https://github.com/user-attachments/assets/51eadd64-0364-4804-b443-c68bafbed631" controls width="100%"></video>
+
+</div>
 
 ---
 
@@ -205,6 +233,8 @@ A soup-to-nuts run on the Stripe recording — drop in the video, pick mode 4, e
 ## 🛠️ How it works
 
 A video flows through one shared pipeline; the mode you pick determines where it exits.
+
+<div align="center">
 
 ```mermaid
 flowchart TD
@@ -227,6 +257,8 @@ flowchart TD
     M2 -->|Mode 4| SCAF[Scaffolder subagent<br/>writes Vite + React + TS + Tailwind]
     SCAF --> O4([Runnable app · npm run dev])
 ```
+
+</div>
 
 For modes 2–4, the skill walks the extracted frames in batches using a **2-tier subagent pattern**. Disposable subagents read frame batches in parallel and write compact markdown reports to disk. The main agent reads only those reports — never the raw frame images. This keeps the main context small even on long recordings, and makes the cost roughly linear in the number of distinct screens rather than the total frame count.
 
