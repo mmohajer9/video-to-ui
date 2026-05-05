@@ -184,11 +184,11 @@ The same three before/after pairs above, served as native MP4 — sharper, with 
 <tr>
 <td>
   <video src="https://github.com/user-attachments/assets/7068802d-bfff-4ff4-ac74-8224d62a754c" autoplay loop muted playsinline width="100%"></video>
-  <br /><sub><a href="https://github.com/user-attachments/assets/7068802d-bfff-4ff4-ac74-8224d62a754c">Open MP4 →</a></sub>
+  <br /><sub><a href="https://github.com/user-attachments/assets/7068802d-bfff-4ff4-ac74-8224d62a754c">Open MP4 →</a> &nbsp;·&nbsp; <a href="https://github.com/mmohajer9/video-to-ui/raw/refs/heads/main/assets/demos/stripe/input.mp4">Repo file ↓</a></sub>
 </td>
 <td>
   <video src="https://github.com/user-attachments/assets/dc917af4-9790-4a0d-a735-25f6307db4a7" autoplay loop muted playsinline width="100%"></video>
-  <br /><sub><a href="https://github.com/user-attachments/assets/dc917af4-9790-4a0d-a735-25f6307db4a7">Open MP4 →</a></sub>
+  <br /><sub><a href="https://github.com/user-attachments/assets/dc917af4-9790-4a0d-a735-25f6307db4a7">Open MP4 →</a> &nbsp;·&nbsp; <a href="https://github.com/mmohajer9/video-to-ui/raw/refs/heads/main/assets/demos/stripe/output.mp4">Repo file ↓</a></sub>
 </td>
 </tr>
 </table>
@@ -207,11 +207,11 @@ The same three before/after pairs above, served as native MP4 — sharper, with 
 <tr>
 <td>
   <video src="https://github.com/user-attachments/assets/fd918cc3-6bf7-4b57-a2a4-5e1ff7922cab" autoplay loop muted playsinline width="100%"></video>
-  <br /><sub><a href="https://github.com/user-attachments/assets/fd918cc3-6bf7-4b57-a2a4-5e1ff7922cab">Open MP4 →</a></sub>
+  <br /><sub><a href="https://github.com/user-attachments/assets/fd918cc3-6bf7-4b57-a2a4-5e1ff7922cab">Open MP4 →</a> &nbsp;·&nbsp; <a href="https://github.com/mmohajer9/video-to-ui/raw/refs/heads/main/assets/demos/linear-dashboard/input.mp4">Repo file ↓</a></sub>
 </td>
 <td>
   <video src="https://github.com/user-attachments/assets/aa7d0cff-c4db-4175-b50d-5927118764ce" autoplay loop muted playsinline width="100%"></video>
-  <br /><sub><a href="https://github.com/user-attachments/assets/aa7d0cff-c4db-4175-b50d-5927118764ce">Open MP4 →</a></sub>
+  <br /><sub><a href="https://github.com/user-attachments/assets/aa7d0cff-c4db-4175-b50d-5927118764ce">Open MP4 →</a> &nbsp;·&nbsp; <a href="https://github.com/mmohajer9/video-to-ui/raw/refs/heads/main/assets/demos/linear-dashboard/output.mp4">Repo file ↓</a></sub>
 </td>
 </tr>
 </table>
@@ -230,11 +230,11 @@ The same three before/after pairs above, served as native MP4 — sharper, with 
 <tr>
 <td align="center">
   <video src="https://github.com/user-attachments/assets/c936e1f2-e460-4a91-a948-d0897f324f46" autoplay loop muted playsinline width="55%"></video>
-  <br /><sub><a href="https://github.com/user-attachments/assets/c936e1f2-e460-4a91-a948-d0897f324f46">Open MP4 →</a></sub>
+  <br /><sub><a href="https://github.com/user-attachments/assets/c936e1f2-e460-4a91-a948-d0897f324f46">Open MP4 →</a> &nbsp;·&nbsp; <a href="https://github.com/mmohajer9/video-to-ui/raw/refs/heads/main/assets/demos/linear-mobile/input.mp4">Repo file ↓</a></sub>
 </td>
 <td align="center">
   <video src="https://github.com/user-attachments/assets/47365334-867b-45d7-acbc-c9ee4ee3939f" autoplay loop muted playsinline width="55%"></video>
-  <br /><sub><a href="https://github.com/user-attachments/assets/47365334-867b-45d7-acbc-c9ee4ee3939f">Open MP4 →</a></sub>
+  <br /><sub><a href="https://github.com/user-attachments/assets/47365334-867b-45d7-acbc-c9ee4ee3939f">Open MP4 →</a> &nbsp;·&nbsp; <a href="https://github.com/mmohajer9/video-to-ui/raw/refs/heads/main/assets/demos/linear-mobile/output.mp4">Repo file ↓</a></sub>
 </td>
 </tr>
 </table>
