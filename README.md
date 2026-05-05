@@ -99,7 +99,7 @@ Modes 3 and 4 build on mode 2 — both run the same analysis under the hood, the
 
 ## 🎥 Demos
 
-Three before/after pairs. The recording on the left is the input; the artifact on the right is what mode 4 produced. Quick-loading GIF previews below — full-quality MP4 versions follow in the [next section](#demos-mp4).
+Three before/after pairs. The recording on the left is the input; the artifact on the right is what mode 4 produced. Quick-loading GIF previews below — full-quality MP4 versions follow in the [next section](#demos-mp4). If anything below fails to render, all the GIF and MP4 files live directly in the repo at [`assets/demos/`](assets/demos/).
 
 ### Stripe — Financial infrastructure landing
 
@@ -170,7 +170,7 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 
 ## 🎞️ Same demos in MP4
 
-The same three before/after pairs above, served as native MP4 — sharper, with hover-controls. Click anywhere on a clip to play.
+The same three before/after pairs above, served as native MP4 — sharper, with hover-controls. If none of the players load for you, the raw MP4 files are also committed in the repo at [`assets/demos/`](assets/demos/) (each demo has its own subfolder with `input.mp4` and `output.mp4`).
 
 ### Stripe (MP4)
 
