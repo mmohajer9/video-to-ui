@@ -16,6 +16,8 @@
 <sub><a href="#demos">See three before/after demos →</a> &nbsp;·&nbsp; <a href="#full-walkthrough">Watch the full 5-min walkthrough →</a></sub>
 
 <p>
+  <a href="#why">Why</a>
+  &nbsp;·&nbsp;
   <a href="#quick-start">Quick start</a>
   &nbsp;·&nbsp;
   <a href="#what-you-get">What you get</a>
@@ -32,6 +34,14 @@
 </p>
 
 </div>
+
+---
+
+<a id="why"></a>
+
+## 💭 Why
+
+Claude doesn't accept video as input yet (true at the time of publishing this skill, they might add it later). I kept trying to recreate frontends from screen recordings by pasting in screenshots one at a time. I'd lose context between frames, the result was always off, and I'd give up halfway. Screenshots also miss the dynamic stuff: transitions, micro-animations, scroll-triggered reveals, hover states. None of that survives a still frame. So I built this. Every frame gets extracted, read in parallel by disposable subagents, and synthesized into a single design report or a full scaffold, depending on the mode. Motion and timing land in the report too, not just the static layout.
 
 ---
 
