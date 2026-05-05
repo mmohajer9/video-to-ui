@@ -2,41 +2,44 @@
 
 # video-to-ui
 
-**Drop a UI screen recording. Get back a real working frontend.**
-
-A Claude Code skill that turns a screen recording (mobile demo, Figma prototype, marketing clip, anything) into one of five things — extracted frames, a design-system report, codebase edits, a clickable HTML/CSS/JS mockup, or a working Vite + React + TypeScript + Tailwind app you can `npm run dev`.
+**A Claude Code skill that turns a UI screen recording into design data, code edits, or a runnable React scaffold.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-skill-d97757)](https://docs.claude.com/en/docs/claude-code/skills)
-[![ffmpeg](https://img.shields.io/badge/requires-ffmpeg-007808)](https://ffmpeg.org/)
+[![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-d97757)](https://docs.claude.com/en/docs/claude-code/skills)
+[![Requires ffmpeg](https://img.shields.io/badge/requires-ffmpeg-007808)](https://ffmpeg.org/)
 
 </div>
 
 ---
 
-## Why this exists
+## What it does
 
-Most "video understanding" tools give you a transcript or a summary of what happens in the clip. That's not what you want from a UI demo. You want the **design language** out of it, and ideally something runnable that captures the *behavior* — not just the look.
+Point the skill at a screen recording — a Figma prototype walkthrough, a mobile-app demo, a marketing clip, an internal Loom — and it returns one of four deliverables. You pick which one when the skill runs.
 
-`video-to-ui` is built for that. The skill walks the frames with disposable subagents (so the main context never sees raw frames), synthesizes a design system, and then either reports it, applies it to your code, or scaffolds a real app from it.
+| #   | Mode                     | What you get                                                                                                                                                                                                                                                 |
+| --- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | **Extract frames**       | A folder of PNGs from the video. No analysis, no synthesis. The fastest way to get the raw stills.                                                                                                                                                           |
+| 2   | **Analyze the design**   | A markdown report describing the design system on screen — palette in hex, type scale, spacing rhythm, button and card styles, iconography — plus a chronological inventory of the distinct screens. No code.                                                |
+| 3   | **Compare against code** | Mode 2, plus a per-file list of concrete edits to bring named target files closer to the video (`replace --button-radius 4px → 8px in Button.tsx, frame 014`). Always shows the diff list first and waits for approval before editing.                       |
+| 4   | **Scaffold a React app** | Mode 2, plus a runnable **Vite + React + TypeScript + Tailwind + Framer Motion** project at `app/`, with one component per screen, a mock API that mimics the video's timing, and Tailwind tokens populated from the analysis. `npm install && npm run dev`. |
 
-## What you can do with it
-
-When you run the skill, it asks which mode you want:
-
-| #   | Mode                            | What you get                                                                                                                                                                                                           |
-| --- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | **Extract frames**              | A folder of PNGs from the video. No analysis. Fast.                                                                                                                                                                    |
-| 2   | **Analyze the design**          | A markdown report: palette in hex, type scale, spacing rhythm, button/card styles, plus a chronological list of distinct screens.                                                                                      |
-| 3   | **Compare to your code**        | Mode 2, plus a diff list of edits ("change `--button-radius` 4px → 8px in `Button.tsx`") against files you point it at. **Always asks before editing.**                                                                |
-| 4   | **Build an HTML/CSS/JS mockup** | A clickable, vanilla-JS preview at `mockup/index.html`. No framework. No build step. Open in a browser.                                                                                                                |
-| 5   | **Build a real frontend app**   | A working **Vite + React + TypeScript + Tailwind + Framer Motion** app at `app/`. Real components, real state, working interactions, mock API that streams the same way the video shows. `npm install && npm run dev`. |
-
-Modes 3, 4, and 5 are alternative deliverables that all build on mode 2. Pick one based on what you want at the end.
+Modes 3 and 4 build on mode 2 — both run the same analysis under the hood, then act on it differently. Pick mode 3 if you have a codebase you want to bring closer to the design in the video; pick mode 4 if you want a runnable starting point.
 
 ## Install
 
-### Option A — Plugin marketplace (recommended)
+### `npx` (fastest, via [skills.sh](https://skills.sh))
+
+```bash
+# project scope (drops into ./.claude/skills/video-to-ui)
+npx skills add mmohajer9/video-to-ui --skill video-to-ui
+
+# user scope (drops into ~/.claude/skills/video-to-ui)
+npx skills add mmohajer9/video-to-ui --skill video-to-ui --global
+```
+
+To uninstall later: `npx skills rm video-to-ui`. Powered by the open-source [`vercel-labs/skills`](https://github.com/vercel-labs/skills) CLI.
+
+### Plugin marketplace (in-app)
 
 In Claude Code:
 
@@ -45,38 +48,30 @@ In Claude Code:
 /plugin install video-to-ui@video-to-ui
 ```
 
-That's it. Restart and the skill is available.
-
-### Option B — Drop-in to a single project
-
-```bash
-git clone https://github.com/mmohajer9/video-to-ui.git
-mkdir -p .claude/skills
-cp -r video-to-ui/skills/video-to-ui .claude/skills/video-to-ui
-```
-
-### Option C — Make it available everywhere
+### Manual drop-in (no Node, no Claude Code marketplace command)
 
 ```bash
 git clone https://github.com/mmohajer9/video-to-ui.git ~/src/video-to-ui
 ln -s ~/src/video-to-ui/skills/video-to-ui ~/.claude/skills/video-to-ui
 ```
 
-## Use it
+After any of the above, restart Claude Code. The skill becomes available as `/video-to-ui` and auto-triggers on natural-language requests that match its description.
 
-The simplest invocation is just a video path:
+## How to invoke
+
+The minimum invocation is a path to a video. The skill then asks which mode and where to put the output.
 
 ```text
 /video-to-ui ~/Downloads/demo.mp4
 ```
 
-The skill will ask which mode. You can also be conversational:
+It also auto-triggers on natural-language requests. Examples that route directly:
 
-- *"I have a screen recording at `~/demo.mp4` — what design system is it using?"* → mode 2
+- *"What design system is this screen recording using? `~/demo.mp4`"* → mode 2
 - *"Make the components in `src/components/` feel like this video: `demo.mp4`"* → mode 3
-- *"Build me a working frontend app from this video"* → mode 5
+- *"Scaffold a working frontend app from this video"* → mode 4
 
-Pre-extracted frames work too — pass a folder instead of a video and `ffmpeg` isn't needed:
+A directory of pre-extracted frames works in place of a video, and skips the ffmpeg dependency:
 
 ```text
 /video-to-ui /tmp/frames/
@@ -84,19 +79,23 @@ Pre-extracted frames work too — pass a folder instead of a video and `ffmpeg` 
 
 ## Requirements
 
-- **[ffmpeg](https://ffmpeg.org/)** for frame extraction (skip if you bring pre-extracted frames).
+- **[ffmpeg](https://ffmpeg.org/)** — required for frame extraction. Skip if you bring pre-extracted frames.
   - macOS: `brew install ffmpeg`
   - Debian/Ubuntu: `sudo apt install ffmpeg`
   - Windows: `winget install Gyan.FFmpeg`
-- **[Node.js ≥ 18](https://nodejs.org/)** — only for mode 5 (running the generated app).
+- **[Node.js ≥ 18](https://nodejs.org/)** — required for mode 4 only, to run the generated app. The skill scaffolds the project but does not run `npm install` for you.
 
-## How it stays cheap on context
+## Pairs well with: `frontend-design`
 
-For modes 2–5, the skill walks frames in batches using a 2-tier subagent pattern: disposable subagents read frame batches and emit compact markdown notes, the main agent reads only the notes — never raw frames. On a 10-minute video this is roughly a 90% context reduction vs. naive whole-video analysis.
+In mode 4, if the [`frontend-design`](https://docs.claude.com/en/docs/claude-code/skills) skill is installed, the scaffolding subagent reads it before generating components and applies its layout, composition, and polish guidance on top of the video-derived design tokens. The video supplies the *signal* (palette, screen inventory, animation language); `frontend-design` supplies the *craftsmanship* (component composition, micro-interactions). The skill works without it — output is meaningfully richer with it.
 
-In modes 4 and 5, a separate dedicated subagent receives the design report and curated frames and writes the deliverable in one pass, so the main agent's context never holds the generated code either.
+## How it works under the hood
 
-(The 2-tier pattern is adapted from [fabriqaai/ffmpeg-analyse-video-skill](https://github.com/fabriqaai/ffmpeg-analyse-video-skill).)
+For modes 2–4, the skill walks the extracted frames in batches using a 2-tier subagent pattern. Disposable subagents read frame batches in parallel and write compact markdown reports to disk. The main agent reads only those reports — never the raw frame images. This keeps the main context small even on long recordings, and makes the cost roughly linear in the number of distinct screens rather than the total frame count.
+
+In mode 4, a separate dedicated subagent receives the design report and curated frame set and writes the entire React project in one pass, so the generated code stays out of the main agent's context too.
+
+The 2-tier walk is adapted from [fabriqaai/ffmpeg-analyse-video-skill](https://github.com/fabriqaai/ffmpeg-analyse-video-skill).
 
 ## Frame budget
 
@@ -108,60 +107,50 @@ Default extraction rate scales with video length:
 | 2–10 min | 0.5 fps     |
 | > 10 min | 0.25 fps    |
 
-The skill enforces a budget on the resulting frame count: ≤ 120 frames proceed silently, 121–300 warn, > 300 require an explicit override. For very long videos, pre-extract just the segments you care about.
+The skill caps the resulting frame count: ≤ 120 proceed silently, 121–300 print a warning before continuing, > 300 require an explicit override. For long videos, pre-extract just the segments that matter and pass the frames folder.
 
-## Limitations
+## Scope and limitations
 
-- **No audio transcription** in v1 — pass a notes file as the third argument if voiceover matters.
-- **No autonomous code edits** — mode 3 always shows changes first and waits for approval. This is core to the skill's value, not a bug.
-- **No invented design tokens** — if your target files have no token system, the skill flags it instead of fabricating one.
-- **Mode 4 mockup** is a static visualization, not production code.
-- **Mode 5 app** is a strong scaffold, not a finished product. Mocked behaviors are commented inline so you can swap them for real ones.
+Things this skill is deliberately not:
+
+- **Not an audio transcriber.** v1 has no Whisper / Gemini / OpenAI integration. If voiceover carries design intent ("make this calmer than the current page"), pass a notes file as the third argument or paste the relevant text into the conversation.
+- **Not autonomous.** Mode 3 always shows the proposed edits first and waits for explicit approval. The approval gate is intentional — design judgments benefit from a human in the loop, and a wrong autopatch is harder to undo than a wrong recommendation.
+- **Not a token-system fabricator.** If your target files have no design tokens or theme object, the skill flags that as a prerequisite step and stops short of inventing parallel tokens.
+- **Mode 4 produces a scaffold, not a finished product.** The generated app is runnable and opinionated, with real components, real state, and a mock API that approximates the video's timing. It is a strong starting point, not a deliverable. Inferences about behaviors that weren't fully visible in the video are commented inline so you can replace them with real logic.
 
 ## Repo layout
 
 ```text
 video-to-ui/
 ├── .claude-plugin/
-│   └── marketplace.json        # makes /plugin marketplace add work
+│   └── marketplace.json        # registers the plugin so /plugin marketplace add works
 ├── skills/
-│   └── video-to-ui/            # the actual skill
+│   └── video-to-ui/            # the skill itself
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       ├── SKILL.md            # main skill instructions
-│       ├── references/         # subagent prompts + checklists
-│       │   ├── batch-analyzer.md
-│       │   └── synthesis-checklist.md
+│       ├── references/
+│       │   ├── batch-analyzer.md      # disposable-subagent prompt template
+│       │   └── synthesis-checklist.md # rules for the synthesis phase
 │       └── scripts/
-│           ├── extract-frames.sh
-│           └── check-deps.sh
+│           ├── extract-frames.sh      # ffmpeg wrapper with --help, validation, --scene mode
+│           └── check-deps.sh          # ffmpeg/ffprobe presence check with install hints
 ├── README.md
 ├── LICENSE
+├── CHANGELOG.md
 └── CONTRIBUTING.md
 ```
 
 ## Related work
 
-- **[fabriqaai/ffmpeg-analyse-video-skill](https://github.com/fabriqaai/ffmpeg-analyse-video-skill)** — parent of the 2-tier subagent pattern. Use it for general video summarization.
-- **[jordanrendric/claude-video-vision](https://github.com/jordanrendric/claude-video-vision)** — adds Whisper / Gemini / OpenAI audio transcription. Use it if you need voiceover captured.
-- **[JosiahSiegel/claude-plugin-marketplace](https://github.com/JosiahSiegel/claude-plugin-marketplace)** — community marketplace with a general-purpose `ffmpeg-master` plugin.
+- **[fabriqaai/ffmpeg-analyse-video-skill](https://github.com/fabriqaai/ffmpeg-analyse-video-skill)** — origin of the 2-tier subagent pattern this skill borrows. Use it for general video summarization rather than UI-specific analysis.
+- **[jordanrendric/claude-video-vision](https://github.com/jordanrendric/claude-video-vision)** — adds Whisper / Gemini / OpenAI audio transcription on top of frame analysis. Use it when voiceover content matters.
+- **[JosiahSiegel/claude-plugin-marketplace](https://github.com/JosiahSiegel/claude-plugin-marketplace)** — community marketplace including a general-purpose `ffmpeg-master` plugin.
 
 ## Contributing
 
-Issues and PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Areas where help is most useful right now:
-
-- Audio transcription (mode 2/3/5 with voiceover context)
-- More framework targets for mode 5 (Svelte, Vue, SolidJS)
-- A test fixture set of short reference videos
+Issues and PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for what kinds of changes are wanted (audio transcription, more mode-4 framework targets, test fixtures) and what's off-limits (autonomous edits in mode 3, fabricated tokens, fake device chrome on editorial components).
 
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
----
-
-<div align="center">
-
-If this saved you a Friday afternoon, **a star helps a lot.** ⭐
-
-</div>

@@ -31,6 +31,5 @@ body:
         - Mode 1 — extract frames
         - Mode 2 — analyze design
         - Mode 3 — compare-and-edit
-        - Mode 4 — HTML/CSS/JS mockup
-        - Mode 5 — Vite + React app
+        - Mode 4 — scaffold Vite + React + TypeScript + Tailwind app
         - Cross-cutting (install, infra, docs)

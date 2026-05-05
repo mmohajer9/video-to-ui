@@ -1,29 +1,29 @@
 ---
 name: video-to-ui
 description: |
-  Take a UI screen recording (mobile/desktop/web/marketing video) and do one of five things — your
+  Take a UI screen recording (mobile/desktop/web/marketing video) and do one of four things — your
   pick: (1) just extract the frames as PNGs, (2) analyze the design system shown in the video and
   list the distinct screens, (3) compare the video against files in your codebase and produce a
-  concrete list of edits to make those files feel like the video, (4) build a standalone HTML/CSS/JS
-  mockup that visualizes the UI in a browser, or (5) scaffold a real frontend app
-  (Vite + React + TypeScript + Tailwind) that recreates the UI's behavior — not just its appearance —
-  with working interactions and animations. Option 3 always shows you the proposed changes first
-  and waits for your approval before editing. Requires ffmpeg; mode 5 additionally needs Node.js
-  to run the generated app.
+  concrete list of edits to make those files feel like the video, or (4) scaffold a real frontend
+  app (Vite + React + TypeScript + Tailwind) that recreates the UI's behavior — not just its
+  appearance — with working interactions and animations. Option 3 always shows you the proposed
+  changes first and waits for your approval before editing. Requires ffmpeg; mode 4 additionally
+  needs Node.js to run the generated app. Mode 4 reads the `frontend-design` skill (if installed)
+  before generating to inherit its component-quality and aesthetic guidance.
 
   Trigger whenever the user mentions a screen recording, video walkthrough, mobile-app demo,
   desktop-app capture, marketing/product video, or wants to extract design insights from a clip —
   even if they don't explicitly say "use the video skill". Phrases like "I have this video of a UI",
   "extract frames from this recording", "what's the design system in this video", "make my
-  components look like this clip", "build me a mockup from this video", "build a frontend app from
-  this video", or "I have a UI demo, here are files I want to update" should all trigger it. The
-  skill itself will ask which of the five modes to run.
+  components look like this clip", "build a frontend app from this video", or "I have a UI demo,
+  here are files I want to update" should all trigger it. The skill itself will ask which of the
+  four modes to run.
 argument-hint: <video-or-frames-path> [target-files-or-globs] [notes-file]
 ---
 
 # video-to-ui
 
-Take a UI screen recording and do one of five things with it: extract the frames as images, analyze the design system on screen, produce a code-edit diff list against named files in the user's codebase, build a standalone HTML/CSS/JS mockup that visualizes the UI as a clickable web preview, or scaffold a real frontend app (Vite + React + TypeScript + Tailwind) that recreates the UI's behavior with working interactions. The user picks the mode and output location up front — see **Mode and output location** below — and the skill walks them through whichever flow they chose.
+Take a UI screen recording and do one of four things with it: extract the frames as images, analyze the design system on screen, produce a code-edit diff list against named files in the user's codebase, or scaffold a real frontend app (Vite + React + TypeScript + Tailwind) that recreates the UI's behavior with working interactions. The user picks the mode and output location up front — see **Mode and output location** below — and the skill walks them through whichever flow they chose.
 
 When code edits are involved, the skill always shows the proposed changes first and waits for explicit approval before editing. Design judgments benefit from a human in the loop, and a wrong autopatch is harder to undo than a wrong recommendation.
 
@@ -43,23 +43,21 @@ The skill needs two answers up front: which mode to run, and where to put the ou
 
 Suggested phrasing:
 
-> I can do one of five things with your video. Which would you like?
+> I can do one of four things with your video. Which would you like?
 >
 > 1. **Just extract the frames** — I'll pull stills out of the video into a folder so you can flip through them yourself or feed them to another tool. Fastest option, no analysis.
 > 2. **Analyze the design** — I'll watch the video and write up the design system I see (palette, type, spacing, button styles, motifs) plus a list of the distinct screens. No code changes, just a report.
 > 3. **Compare against my code and suggest edits** — same analysis as option 2, but I'll also compare it against files in your codebase and produce a list of concrete changes to make those files feel like the video. I'll show you the changes first and wait for your okay before editing anything. *(For this option, I'll need you to point me at the files or folders you want refined.)*
-> 4. **Build a standalone web mockup** — same analysis as option 2, but I'll also build a clickable HTML/CSS/JS mockup of the UI at `<output-dir>/mockup/`. Vanilla — no framework, no build step, just double-click `index.html`. Useful as a visualization or stakeholder review artifact. *(No codebase needed.)*
-> 5. **Build a real frontend app** — same analysis as option 2, but I'll also scaffold a working frontend app (Vite + React + TypeScript + Tailwind + Framer Motion) at `<output-dir>/app/` that recreates the UI's *behavior*, not just its appearance. Real components, real state, working interactions, mock API that streams the same way the video shows. You'd run `npm install && npm run dev` to see it. Useful as a starting point for a real implementation. *(No codebase needed; Node.js needed to run the result.)*
+> 4. **Build a real frontend app** — same analysis as option 2, but I'll also scaffold a working frontend app (Vite + React + TypeScript + Tailwind + Framer Motion) at `<output-dir>/app/` that recreates the UI's *behavior*, not just its appearance. Real components, real state, working interactions, mock API that streams the same way the video shows. You'd run `npm install && npm run dev` to see it. Useful as a starting point for a real implementation. *(No codebase needed; Node.js needed to run the result.)*
 >
-> Options 3, 4, and 5 are alternative deliverables that all build on option 2. Each option includes everything option 2 produces (frames + analysis report). Inclusion: `1 ⊂ 2 ⊂ 3`, `1 ⊂ 2 ⊂ 4`, and `1 ⊂ 2 ⊂ 5`.
+> Options 3 and 4 are alternative deliverables that both build on option 2. Each option includes everything option 2 produces (frames + analysis report). Inclusion: `1 ⊂ 2 ⊂ 3` and `1 ⊂ 2 ⊂ 4`.
 
 Map the user's choice:
 
 - Option 1 → **frames-only**: runs Phases 0 and 1 only, then prints the output directory.
 - Option 2 → **insights-only**: runs Phases 0, 1, 3, 4, and 4.5.
 - Option 3 → **full-diff**: runs Phases 0, 1, 2, 3, 4, 4.5, 5, 6. If the user hasn't already named target files, ask for them now (e.g. "Which files or folders should I compare the video against? You can pass paths like `src/components/Button.tsx` or globs like `src/styles/**/*.css`").
-- Option 4 → **mockup**: runs Phases 0, 1, 3, 4, 4.5, and 4.6. No target files needed; no approval gate (the mockup is the deliverable, no codebase edits to confirm).
-- Option 5 → **app**: runs Phases 0, 1, 3, 4, 4.5, and 4.7. No target files needed; no approval gate. Heaviest mode — the subagent walks the analysis, then writes a multi-file React project from scratch.
+- Option 4 → **app**: runs Phases 0, 1, 3, 4, 4.5, and 4.6. No target files needed; no approval gate. Heaviest mode — the subagent walks the analysis, reads the `frontend-design` skill if installed, then writes a multi-file React project from scratch.
 
 ### Question 2 — Output location
 
@@ -76,7 +74,7 @@ The user can pick "Other" to type a custom absolute path. If the path doesn't ex
 
 ### When to skip the questions
 
-Skip them only when the user has *unambiguously* stated their intent in their original message — phrases like "just extract the frames into ./frames" → frames-only with a custom path, "build me a mockup from this video" → mockup mode, "build me a frontend app from this video" / "scaffold a working app for this UI" → app mode, or a clear video + targets pair → full-diff. When in doubt, ask. The cost of asking once is small; the cost of running the wrong mode (especially the long subagent walks in options 2/3/4/5) is large.
+Skip them only when the user has *unambiguously* stated their intent in their original message — phrases like "just extract the frames into ./frames" → frames-only with a custom path, "build me a frontend app from this video" / "scaffold a working app for this UI" → app mode, or a clear video + targets pair → full-diff. When in doubt, ask. The cost of asking once is small; the cost of running the wrong mode (especially the long subagent walks in options 2/3/4) is large.
 
 After the answers are set, confirm in one short line — "okay, I'll just extract the frames into ./video-to-ui-1714502550/" — so the user can course-correct before the work begins.
 
@@ -185,9 +183,9 @@ The deliverable. For each target file, a section like:
 
 ## Phase 4.5: Export artifacts
 
-*Runs in `insights-only`, `full-diff`, `mockup`, and `app` modes (after Phase 4). Skipped in `frames-only`.*
+*Runs in `insights-only`, `full-diff`, and `app` modes (after Phase 4). Skipped in `frames-only`.*
 
-Before printing the synthesized artifacts to chat, ask the user how they want them packaged. Use a single `AskUserQuestion` call with two questions (or a numbered fallback if AskUserQuestion is unavailable). **In `mockup` and `app` modes, skip Question 2** — the curated frame set is always copied because Phases 4.6 and 4.7 need it as visual reference.
+Before printing the synthesized artifacts to chat, ask the user how they want them packaged. Use a single `AskUserQuestion` call with two questions (or a numbered fallback if AskUserQuestion is unavailable). **In `app` mode, skip Question 2** — the curated frame set is always copied because Phase 4.6 needs it as visual reference.
 
 ### Question 1 — Export format
 
@@ -210,67 +208,19 @@ Before printing the synthesized artifacts to chat, ask the user how they want th
 - **Single combined markdown file** / **Print + single file**: write all artifacts to `<output-dir>/design-analysis.md` with a short header naming the source video, run timestamp, and frames directory.
 - **Separate files per artifact**: write `<output-dir>/design-system.md` (Artifact 1) and `<output-dir>/screen-inventory.md` (Artifact 2). In `full-diff` mode, also write `<output-dir>/diff-list.md` (Artifact 3).
 - **Print to chat only**: skip file writes. (In `full-diff` mode, the artifacts are still printed in Phase 5 for the approval gate.)
-- **Curated frame set = Yes** (or `mockup`/`app` mode, where it's auto-yes): for each entry in Artifact 2 (Screen inventory), copy the **first frame** of its primary frame range from `<output-dir>/frames/` to `<output-dir>/screens/screen_NN_<snake-cased-name>.png`. `NN` is the inventory order, zero-padded to 2 digits. If the entry lists multiple ranges (e.g. "frames 005, 008 (reappears 011–013)"), use the very first frame number — here, `005`.
+- **Curated frame set = Yes** (or `app` mode, where it's auto-yes): for each entry in Artifact 2 (Screen inventory), copy the **first frame** of its primary frame range from `<output-dir>/frames/` to `<output-dir>/screens/screen_NN_<snake-cased-name>.png`. `NN` is the inventory order, zero-padded to 2 digits. If the entry lists multiple ranges (e.g. "frames 005, 008 (reappears 011–013)"), use the very first frame number — here, `005`.
 
-In `mockup` mode, after the export writes complete, proceed to **Phase 4.6**. In `app` mode, proceed to **Phase 4.7**. In either case, tell the user once: "I'll also copy the curated frame set since the mockup/app needs it as reference" — they didn't pick that question, so explain why it happened.
+In `app` mode, after the export writes complete, proceed to **Phase 4.6**. Tell the user once: "I'll also copy the curated frame set since the app needs it as reference" — they didn't pick that question, so explain why it happened.
 
 In `full-diff` mode, **always also print the artifacts to chat** regardless of the format choice — the approval gate (Phase 5) needs them visible. The format choice only controls whether files are also written.
 
 If the user requests refinements in Phase 5 and you re-print the diff list, also re-write the corresponding file (so the on-disk record matches the final state).
 
-## Phase 4.6: Build standalone web mockup
-
-*Runs in `mockup` mode only (after Phase 4.5). Skipped otherwise.*
-
-Spawn a single dedicated subagent (`subagent_type: general-purpose`) to generate a standalone HTML/CSS/JS mockup at `<output-dir>/mockup/`. The main agent does *not* write the mockup itself — keep that work out of the main context.
-
-### What to give the subagent
-
-Pass the subagent a self-contained brief that includes, inline:
-
-- The full **Artifact 1 (Design system observed)** text — palette, type scale, spacing, radii, button styles, surfaces, iconography, signature motifs, animation language.
-- The full **Artifact 2 (Screen inventory)** text — every distinct screen with its frame range and one-line role.
-- The path to `<output-dir>/screens/` (the curated frame set) as visual reference. Tell the subagent to *read each curated frame* before drafting that screen's markup so the layout matches what was actually on screen, not just the design system summary.
-- The path to write the mockup to: `<output-dir>/mockup/`.
-- The viewport intent — **mobile** if the curated frames look like mobile-app screens, **desktop** if they look like a desktop or web app, or ask the subagent to infer from the frames if it's not obvious from your read of the inventory.
-
-### Required output structure
-
-Tell the subagent to produce, at minimum:
-
-    <output-dir>/mockup/
-      index.html        — single page with screen picker + all screens defined as sections
-      assets/
-        tokens.css      — design tokens (CSS custom properties) extracted from Artifact 1
-        styles.css      — component styles (buttons, cards, nav, inputs, etc.) using the tokens
-        animations.js   — JS for sequenced reveals, status-line streaming, toasts, sheet slide-ups, etc.
-
-Single-HTML preferred over per-screen-file split — easier to share and preview. Screens are stacked as `<section data-screen="...">` blocks; only the active one is visible; a left or top picker switches between them.
-
-### Subagent constraints (non-negotiable)
-
-- **Vanilla HTML/CSS/JS only.** No framework, no build step, no npm. The user must be able to double-click `index.html` and see the mockup work.
-- **No external dependencies** beyond a single optional Google Font `<link>` if the design calls for one. No CDN'd Tailwind, no Bootstrap, no JS libraries.
-- **Use the design tokens from Artifact 1** as CSS custom properties in `tokens.css` — palette, type scale, radii, spacing — and reference them by name throughout `styles.css`. Don't sprinkle raw hex codes in component styles.
-- **Implement the animations described in Artifact 1's animation language.** If the video has a rotating progress arc, the mockup has one. If toasts slide up and fade, the mockup's toasts do too. If sheets slide up over a scrim, same. These are *the* signature of the source UI; skipping them produces a flat, lifeless mockup.
-- **Mobile sources get a phone-frame wrapper.** Each screen renders inside a fixed-width container (e.g. `390 × 844` for iPhone-class) centered on the page, with a subtle device chrome treatment so the mockup reads as "preview of a mobile app" not "broken desktop layout".
-- **Desktop sources fill the viewport.** No phone frame.
-- **Don't fabricate content the video didn't show.** If a screen has Lorem-ipsum-equivalent placeholder copy in the video, use the same. If a screen had real user data ("Mamad", "Welcome Mamad", specific exercise names), preserve it. The mockup should be recognizable as the same product.
-- **Don't draw fake device chrome** (status bars, iOS notches, browser frames) into individual screen sections — that goes on the *outer* phone-frame wrapper if anywhere, not inside each screen's content. (Same antipattern called out in Phase 6.)
-
-### After the subagent returns
-
-- Verify `<output-dir>/mockup/index.html` exists and is non-empty. Check that `assets/` contains the three files (or whatever subset the subagent produced).
-- Print one short summary to chat: where the mockup is, how many screens it covers, and how to open it (`open <output-dir>/mockup/index.html` on macOS, or just double-click).
-- Don't open it for the user automatically — they may want to inspect the source first.
-
-If the subagent returns a partial mockup (e.g. only some screens implemented), surface that honestly: "Mockup written to `<path>` covering N of M screens; the rest are stubbed/missing." Don't claim full coverage that isn't there.
-
-## Phase 4.7: Build frontend app
+## Phase 4.6: Build frontend app
 
 *Runs in `app` mode only (after Phase 4.5). Skipped otherwise.*
 
-Spawn a single dedicated subagent (`subagent_type: general-purpose`) to scaffold and write a working frontend app at `<output-dir>/app/`. Unlike the mockup (Phase 4.6), this is a real app — multi-file, framework-based, with a build step — that recreates the UI's *behavior*, not just its appearance. Every interaction the video shows must work in code, not as a visual stub.
+Spawn a single dedicated subagent (`subagent_type: general-purpose`) to scaffold and write a working frontend app at `<output-dir>/app/`. This is a real app — multi-file, framework-based, with a build step — that recreates the UI's *behavior*, not just its appearance. Every interaction the video shows must work in code, not as a visual stub.
 
 ### Stack (non-negotiable)
 
@@ -293,7 +243,7 @@ Pass the subagent a self-contained brief that includes, inline:
 - The path to `<output-dir>/screens/` (curated frame set) as visual reference. Tell the subagent to *read each curated frame* before drafting that screen's component.
 - The path to write the app to: `<output-dir>/app/`.
 - The viewport intent — **mobile** (route layout wraps each screen in a `<PhoneFrame>`) or **desktop** (full viewport). Infer from the curated frames.
-- If the **frontend-design** skill is installed in the user's environment (check `~/.claude/skills/frontend-design/SKILL.md` and the project's `.claude/skills/frontend-design/SKILL.md`), the subagent should read it first and absorb its component-quality and aesthetic guidance before generating. If not installed, skip this — don't fail.
+- **Instruct the subagent to use the `frontend-design` skill if available.** Before writing any code, the subagent should look for `frontend-design/SKILL.md` in this priority order: (1) project plugins at `.claude/plugins/*/skills/frontend-design/SKILL.md`, (2) user plugins at `~/.claude/plugins/*/skills/frontend-design/SKILL.md`, (3) the project's own `.claude/skills/frontend-design/SKILL.md`, (4) `~/.claude/skills/frontend-design/SKILL.md`. If found, the subagent reads it in full and applies its component-quality, layout, and aesthetic guidance on top of the design tokens extracted from this video. The video supplies the *signal* (tokens, screen inventory, animation language); `frontend-design` supplies the *craftsmanship* (component composition, micro-interactions, visual polish). If `frontend-design` isn't installed, the subagent generates from the video signal alone — don't fail, don't ask the user to install it, just proceed and note in the summary that the output would be richer with `frontend-design` available.
 
 ### Required output structure
 
@@ -342,7 +292,7 @@ If the subagent returns a partial app (some screens stubbed, some animations mis
 
 *Runs in `full-diff` mode only.*
 
-Print the three artifacts in order — this happens regardless of the export-format choice from Phase 4.5, since the approval gate needs them visible in chat. If files were written in Phase 4.5 or a mockup was built in Phase 4.6, mention the path(s) in the same message so the user can review them while deciding. Then stop with:
+Print the three artifacts in order — this happens regardless of the export-format choice from Phase 4.5, since the approval gate needs them visible in chat. If files were written in Phase 4.5, mention the path(s) in the same message so the user can review them while deciding. Then stop with:
 
 > **Diagnosis complete.** Reply `apply` to make these edits, or send refinements (e.g. "skip the spacing changes", "use the violet accent only on primary buttons").
 

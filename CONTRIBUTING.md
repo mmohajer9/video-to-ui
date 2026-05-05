@@ -22,7 +22,7 @@ Restart Claude Code. Now `~/.claude/skills/video-to-ui` points at the repo, so a
 High-leverage:
 
 - **Audio transcription** for voiceover-driven videos (mode 2, 3, 5). Whisper local, OpenAI API, or Gemini are all reasonable.
-- **More mode-5 templates** — Svelte, Vue, SolidJS, plain Next.js. Each lives behind a small flag in the synthesis subagent.
+- **More mode-4 framework targets** — Svelte, Vue, SolidJS, plain Next.js. Each lives behind a small flag in the scaffold subagent's brief.
 - **Better screen-deduplication** — currently the curated frame set is a heuristic per the synthesis-checklist; it under-clusters on long videos with subtle screen variants.
 - **Test fixtures** — short reference videos (5–30s) covering common UI patterns (sheet, drawer, list, form, chart) that we can re-run the skill against to detect regressions.
 

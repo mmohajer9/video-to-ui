@@ -19,8 +19,8 @@ body:
     id: mode
     attributes:
       label: Mode
-      description: Which of the five modes were you running? (1 frames / 2 analyze / 3 compare-and-edit / 4 mockup / 5 app)
-      placeholder: "e.g. 5"
+      description: Which of the four modes were you running? (1 frames / 2 analyze / 3 compare-and-edit / 4 scaffold-react-app)
+      placeholder: "e.g. 4"
     validations:
       required: true
   - type: input
