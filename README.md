@@ -83,10 +83,10 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 <tr>
 <td>
-  <video src="https://github.com/mmohajer9/video-to-ui/raw/main/assets/demos/stripe/input.mp4" autoplay loop muted playsinline controls width="100%"></video>
+  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/stripe/input.mp4" autoplay loop muted playsinline controls width="100%"></video>
 </td>
 <td>
-  <video src="https://github.com/mmohajer9/video-to-ui/raw/main/assets/demos/stripe/output.mp4" autoplay loop muted playsinline controls width="100%"></video>
+  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/stripe/output.mp4" autoplay loop muted playsinline controls width="100%"></video>
 </td>
 </tr>
 </table>
@@ -100,10 +100,10 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 <tr>
 <td>
-  <video src="https://github.com/mmohajer9/video-to-ui/raw/main/assets/demos/linear-dashboard/input.mp4" autoplay loop muted playsinline controls width="100%"></video>
+  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/linear-dashboard/input.mp4" autoplay loop muted playsinline controls width="100%"></video>
 </td>
 <td>
-  <video src="https://github.com/mmohajer9/video-to-ui/raw/main/assets/demos/linear-dashboard/output.mp4" autoplay loop muted playsinline controls width="100%"></video>
+  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/linear-dashboard/output.mp4" autoplay loop muted playsinline controls width="100%"></video>
 </td>
 </tr>
 </table>
@@ -117,10 +117,10 @@ Three before/after pairs. The recording on the left is the input; the artifact o
 </tr>
 <tr>
 <td align="center">
-  <video src="https://github.com/mmohajer9/video-to-ui/raw/main/assets/demos/linear-mobile/input.mp4" autoplay loop muted playsinline controls width="55%"></video>
+  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/linear-mobile/input.mp4" autoplay loop muted playsinline controls width="55%"></video>
 </td>
 <td align="center">
-  <video src="https://github.com/mmohajer9/video-to-ui/raw/main/assets/demos/linear-mobile/output.mp4" autoplay loop muted playsinline controls width="55%"></video>
+  <video src="https://raw.githubusercontent.com/mmohajer9/video-to-ui/main/assets/demos/linear-mobile/output.mp4" autoplay loop muted playsinline controls width="55%"></video>
 </td>
 </tr>
 </table>
