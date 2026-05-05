@@ -25,6 +25,9 @@ ignored/
 *.mov
 *.webm
 *.mkv
+!assets/**/*.mp4
+!assets/**/*.gif
+!assets/**/*.png
 
 # Frames folders that may sit at the repo root during local testing
 frames/
