@@ -57,12 +57,12 @@ The skill asks which mode to run and where to put the output, then gets to work.
 
 Point it at a screen recording — a Figma prototype walkthrough, a mobile-app demo, a marketing clip, an internal Loom — and pick one of four deliverables when the skill runs.
 
-| #   | Mode                          | What you get                                                                                                                                                                                                                                                 |
-| --- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1   | 🖼️ **Extract frames**          | A folder of PNGs from the video. No analysis, no synthesis. The fastest way to get the raw stills.                                                                                                                                                           |
-| 2   | 🔍 **Analyze the design**      | A markdown report describing the design system on screen — palette in hex, type scale, spacing rhythm, button and card styles, iconography — plus a chronological inventory of the distinct screens. No code.                                                |
-| 3   | 📝 **Compare against code**    | Mode 2, plus a per-file list of concrete edits to bring named target files closer to the video (`replace --button-radius 4px → 8px in Button.tsx, frame 014`). Always shows the diff list first and waits for approval before editing.                       |
-| 4   | ⚛️ **Scaffold a React app**    | Mode 2, plus a runnable **Vite + React + TypeScript + Tailwind + Framer Motion** project at `app/`, with one component per screen, a mock API that mimics the video's timing, and Tailwind tokens populated from the analysis. `npm install && npm run dev`. |
+| #   | Mode                       | What you get                                                                                                                                                                                                                                                 |
+| --- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | 🖼️ **Extract frames**       | A folder of PNGs from the video. No analysis, no synthesis. The fastest way to get the raw stills.                                                                                                                                                           |
+| 2   | 🔍 **Analyze the design**   | A markdown report describing the design system on screen — palette in hex, type scale, spacing rhythm, button and card styles, iconography — plus a chronological inventory of the distinct screens. No code.                                                |
+| 3   | 📝 **Compare against code** | Mode 2, plus a per-file list of concrete edits to bring named target files closer to the video (`replace --button-radius 4px → 8px in Button.tsx, frame 014`). Always shows the diff list first and waits for approval before editing.                       |
+| 4   | ⚛️ **Scaffold a React app** | Mode 2, plus a runnable **Vite + React + TypeScript + Tailwind + Framer Motion** project at `app/`, with one component per screen, a mock API that mimics the video's timing, and Tailwind tokens populated from the analysis. `npm install && npm run dev`. |
 
 Modes 3 and 4 build on mode 2 — both run the same analysis under the hood, then act on it differently. Pick mode 3 if you have a codebase you want to bring closer to the design in the video; pick mode 4 if you want a runnable starting point.
 
@@ -106,8 +106,8 @@ Three before/after pairs. The recording on the left is the input; the artifact o
   <br /><sub><a href="assets/demos/linear-dashboard/input.mp4">MP4 (sharper) ↓</a></sub>
 </td>
 <td>
-  <img src="assets/demos/linear-dashboard/output.png" width="100%" alt="Linear dashboard scaffold — coming soon" />
-  <br /><sub><i>Scaffold pending — PRs welcome</i></sub>
+  <img src="assets/demos/linear-dashboard/output.gif" width="100%" alt="Running React scaffold of the Linear dashboard at localhost" />
+  <br /><sub><a href="assets/demos/linear-dashboard/output.mp4">MP4 (sharper) ↓</a></sub>
 </td>
 </tr>
 </table>
@@ -125,8 +125,8 @@ Three before/after pairs. The recording on the left is the input; the artifact o
   <br /><sub><a href="assets/demos/linear-mobile/input.mp4">MP4 (sharper) ↓</a></sub>
 </td>
 <td align="center">
-  <img src="assets/demos/linear-mobile/output.png" width="55%" alt="Linear mobile scaffold — coming soon" />
-  <br /><sub><i>Scaffold pending — PRs welcome</i></sub>
+  <img src="assets/demos/linear-mobile/output.gif" width="55%" alt="Running React scaffold of the Linear mobile landing at localhost" />
+  <br /><sub><a href="assets/demos/linear-mobile/output.mp4">MP4 (sharper) ↓</a></sub>
 </td>
 </tr>
 </table>
@@ -190,6 +190,47 @@ A directory of pre-extracted frames works in place of a video, and skips the ffm
 ```text
 /video-to-ui /tmp/frames/
 ```
+
+---
+
+## 📁 Output directory
+
+The skill creates one output directory per run, named after the video (or `video-to-ui-<timestamp>` if it can't infer a name). What lands in it depends on the mode:
+
+```text
+output/video-to-ui-<name>/
+├── frames/
+│   ├── frame_00001.png            # raw stills extracted by ffmpeg
+│   ├── frame_00002.png
+│   ├── ...
+│   ├── batch_001.md               # per-batch reports written by subagents
+│   ├── batch_002.md               # (mode 2-4 only)
+│   └── ...
+├── screens/                       # mode 2-4 only
+│   ├── screen_01_hero.png         # curated key screens, named by content
+│   ├── screen_02_pricing_grid.png
+│   └── ...
+├── design-analysis.md             # mode 2-4: palette, type, spacing,
+│                                  # buttons, cards, screen inventory
+└── app/                           # mode 4 only — runnable Vite project
+    ├── package.json
+    ├── tailwind.config.ts
+    └── src/
+        ├── components/            # shared atoms (Button, Card, Nav, ...)
+        ├── sections/              # one component per distinct screen
+        ├── pages/
+        ├── lib/                   # mock API that mimics video timing
+        └── ...
+```
+
+| Mode | Files produced                                                       |
+| ---- | -------------------------------------------------------------------- |
+| 1    | `frames/frame_*.png`                                                 |
+| 2    | + `frames/batch_*.md`, `screens/`, `design-analysis.md`              |
+| 3    | mode 2 outputs, plus the proposed edits applied to your target files |
+| 4    | mode 2 outputs, plus `app/`                                          |
+
+The `frames/batch_*.md` files are how disposable subagents pass their findings back without bloating the main agent's context. They're plain markdown — open one to see exactly what each subagent observed in its slice of the video.
 
 ---
 
@@ -280,7 +321,6 @@ Open to PRs on any of the following:
 - Mode 4 framework targets beyond Vite + React (Next.js, SvelteKit, SwiftUI scaffolds)
 - Test fixtures: a small library of input videos with expected design-analysis snapshots
 - Browser-extension recorder that emits clean frames directly, skipping ffmpeg
-- Linear dashboard and Linear mobile demo scaffolds (input recordings already in [`assets/demos/`](assets/demos/))
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for what's wanted and what's off-limits.
 
