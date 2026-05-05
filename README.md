@@ -387,6 +387,27 @@ In mode 4, if the [`frontend-design`](https://docs.claude.com/en/docs/claude-cod
 
 ---
 
+<a id="other-agents"></a>
+
+## 🔌 Using with other agents
+
+This skill is **built and tested for Claude Code**. The pieces are split between agnostic and Claude Code-specific:
+
+- **Mode 1 (frame extraction)** runs entirely through [`scripts/extract-frames.sh`](skills/video-to-ui/scripts/extract-frames.sh) — any agent that can execute bash will work.
+- **Modes 2–4** depend on Claude Code's `Task` tool to dispatch *disposable* subagents that read frame batches in parallel and write compact reports back. That 2-tier walk is what keeps the main context tiny on long recordings. Agents with an equivalent subagent primitive are good fits; agents without one still produce the right output but burn the main context faster, which can hit limits on long videos.
+
+| Agent                              | Compatibility                                   |
+| ---------------------------------- | ----------------------------------------------- |
+| Claude Code                        | ✅ Tested · primary target                      |
+| Claude Agent SDK                   | ✅ Same skill format and subagent primitive     |
+| Copilot CLI                        | ⚠️ Loads via the `skill` tool; subagent semantics differ |
+| Cursor · Continue · Aider          | ⚠️ Use [`SKILL.md`](skills/video-to-ui/SKILL.md) as a long prompt; no batched parallelism |
+| Generic LLM with file + bash       | ⚠️ Workable with manual orchestration            |
+
+If you adapt this for another agent, please open a PR or post in [Discussions](https://github.com/mmohajer9/video-to-ui/discussions) — happy to ship vetted variants under an `agents/` folder.
+
+---
+
 ## 📊 Frame budget
 
 Default extraction rate scales with video length:
