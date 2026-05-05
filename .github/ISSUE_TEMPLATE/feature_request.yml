@@ -1,0 +1,36 @@
+name: Feature request
+description: Suggest an improvement or a new mode
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the use case before the proposed change. What were you trying to do when the current behavior fell short?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: What should the skill do differently? Be concrete.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you thought about and why you discarded them.
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      description: Which mode does this affect?
+      multiple: true
+      options:
+        - Mode 1 — extract frames
+        - Mode 2 — analyze design
+        - Mode 3 — compare-and-edit
+        - Mode 4 — HTML/CSS/JS mockup
+        - Mode 5 — Vite + React app
+        - Cross-cutting (install, infra, docs)

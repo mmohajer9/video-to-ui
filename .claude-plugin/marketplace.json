@@ -1,0 +1,27 @@
+{
+  "name": "video-to-ui",
+  "owner": {
+    "name": "mmohajer9",
+    "email": "mmohajer98@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "video-to-ui",
+      "source": "./skills/video-to-ui",
+      "description": "Turn a UI screen recording into frames, a design-system report, codebase edits, a clickable HTML/CSS/JS mockup, or a working Vite + React + TypeScript + Tailwind app.",
+      "version": "0.1.0",
+      "category": "skills",
+      "keywords": [
+        "video",
+        "ui",
+        "design-system",
+        "frontend",
+        "react",
+        "tailwind",
+        "ffmpeg",
+        "screen-recording",
+        "design-to-code"
+      ]
+    }
+  ]
+}

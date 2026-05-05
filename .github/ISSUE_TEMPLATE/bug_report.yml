@@ -1,0 +1,56 @@
+name: Bug report
+description: Something didn't behave the way the README says it should
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: A clear description of the bug. Paste any error output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: mode
+    attributes:
+      label: Mode
+      description: Which of the five modes were you running? (1 frames / 2 analyze / 3 compare-and-edit / 4 mockup / 5 app)
+      placeholder: "e.g. 5"
+    validations:
+      required: true
+  - type: input
+    id: video
+    attributes:
+      label: Video specs
+      description: Length, resolution, fps used for extraction, frame count after extraction.
+      placeholder: "e.g. 90s, 1080p, 1fps, 90 frames"
+  - type: input
+    id: claude-code-version
+    attributes:
+      label: Claude Code version
+      description: Run `claude --version`
+      placeholder: "e.g. 2.x.x"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: "macOS 15.1 / Ubuntu 24.04 / Windows 11"
+    validations:
+      required: true
+  - type: input
+    id: ffmpeg
+    attributes:
+      label: ffmpeg version
+      description: Run `ffmpeg -version | head -n1`
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Logs, screenshots, links to a public copy of the input video if reproduction is hard without it.

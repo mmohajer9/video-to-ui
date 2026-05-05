@@ -1,0 +1,41 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (in case anyone scaffolds a demo app inside the repo)
+node_modules/
+dist/
+build/
+.next/
+.cache/
+*.log
+
+# Skill output (anything the skill itself produces while testing)
+video-to-ui-*/
+ignored/
+*.mp4
+*.mov
+*.webm
+*.mkv
+
+# Frames folders that may sit at the repo root during local testing
+frames/
+screens/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Python (in case)
+__pycache__/
+*.pyc
+.venv/
